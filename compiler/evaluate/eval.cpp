@@ -314,7 +314,7 @@ static Tree realeval(Tree exp, Tree visited, Tree localValEnv)
     // Tree 	def;
     Tree fun;
     Tree arg;
-    Tree var, num, chan, body, ldef;
+    Tree var, num, chan, body, ldef, ins, outs, lroutes;
     Tree label;
     Tree cur, lo, hi, step;
     Tree e1, e2, exp2, notused, visited2, lenv2;
@@ -585,6 +585,19 @@ static Tree realeval(Tree exp, Tree visited, Tree localValEnv)
 
     } else if (isBoxPatternMatcher(exp)) {
         return exp;
+
+    } else if (isBoxRoute(exp, ins, outs, lroutes)) {
+        siglist R;
+        Tree    v1 = eval(ins, visited, localValEnv);
+        Tree    v2 = eval(outs, visited, localValEnv);
+        Tree    vr = eval(lroutes, visited, localValEnv);
+
+        if (isNum(v1) && isNum(v2) && isNumericalTuple(vr, R) && (R.size() % 2 == 0)) {
+                        // a valid route description in principle
+            return boxRoute(v1, v2, vr);
+        } else {
+            error << "ERROR : incorrect route expression : " << *exp << endl;
+        }
 
     } else {
         stringstream error;

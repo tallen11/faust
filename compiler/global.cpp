@@ -90,7 +90,7 @@ faust1 uses a loop size of 512, but 512 makes faust2 crash (stack allocation err
 So we use a lower value here.
 */
 
-global::global():TABBER(1), gLoopDetector(1024, 400), gNextFreeColor(1)
+global::global() : TABBER(1), gLoopDetector(1024, 400), gNextFreeColor(1)
 {
     CTree::init();
     Symbol::init();
@@ -257,6 +257,7 @@ global::global():TABBER(1), gLoopDetector(1024, 400), gNextFreeColor(1)
     BOXIDENT         = symbol("BoxIdent");
     BOXCUT           = symbol("BoxCut");
     BOXWAVEFORM      = symbol("BoxWaveform");
+    BOXROUTE         = symbol("BoxRoute");
     BOXWIRE          = symbol("BoxWire");
     BOXSLOT          = symbol("BoxSlot");
     BOXSYMBOLIC      = symbol("BoxSymbolic");
@@ -436,7 +437,7 @@ void global::init()
     // Essential predefined types
     gMemoizedTypes   = new property<AudioType*>();
     gAllocationCount = 0;
-    
+
     // True by default but only usable with -lang ocpp backend
     gEnableFlag = true;
 
