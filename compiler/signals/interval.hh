@@ -63,6 +63,11 @@ struct interval : public virtual Garbageable {
 
     bool isvalid() { return valid; }
     bool isconst() { return valid && (lo == hi); }
+    bool isbitmask()
+    {
+        int n = int(hi) + 1;
+        return isconst && ((n & (-n)) == n);
+    }
     bool haszero() { return (lo <= 0) && (0 <= hi); }
 };
 
@@ -79,6 +84,15 @@ inline interval reunion(const interval& x, const interval& y)
 {
     if (x.valid & y.valid) {
         return interval(min(x.lo, y.lo), max(x.hi, y.hi));
+    } else {
+        return interval();
+    }
+}
+
+inline interval intersection(const interval& x, const interval& y)
+{
+    if (x.valid & y.valid) {
+        dob return interval(min(x.lo, y.lo), max(x.hi, y.hi));
     } else {
         return interval();
     }
