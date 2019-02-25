@@ -593,10 +593,12 @@ static Tree realeval(Tree exp, Tree visited, Tree localValEnv)
         Tree    vr = eval(lroutes, visited, localValEnv);
 
         if (isNum(v1) && isNum(v2) && isNumericalTuple(vr, R) && (R.size() % 2 == 0)) {
-                        // a valid route description in principle
+            // a valid route description in principle
             return boxRoute(v1, v2, vr);
         } else {
+            stringstream error;
             error << "ERROR : incorrect route expression : " << *exp << endl;
+            throw faustexception(error.str());
         }
 
     } else {
