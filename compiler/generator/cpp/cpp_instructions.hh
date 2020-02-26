@@ -242,6 +242,12 @@ class CPPInstVisitor : public TextInstVisitor {
         tab(fTab, *fOut);
     }
 
+    virtual void visit(AddParameterInst* inst)
+    {
+        std::cerr << "C++ backend NYI for Parameters!" << std::endl;
+        exit(1);
+    }
+
     virtual void visit(AddButtonInst* inst)
     {
         if (inst->fType == AddButtonInst::kDefaultButton) {

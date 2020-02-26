@@ -59,6 +59,12 @@ struct SOULInstUIVisitor : public DispatchVisitor, public PathBuilder {
     {
         fMetaAux.push_back(std::make_pair(inst->fKey, inst->fValue));
     }
+
+    virtual void visit(AddParameterInst* inst)
+    {
+        std::cerr << "Soul backend NYI for Parameters!" << std::endl;
+        exit(1);
+    }
    
     virtual void visit(AddButtonInst* inst)
     {
@@ -269,6 +275,12 @@ class SOULInstVisitor : public TextInstVisitor {
     }
 
     virtual ~SOULInstVisitor() {}
+
+    virtual void visit(AddParameterInst* inst)
+    {
+        std::cerr << "Soul backend NYI for Parameters!" << std::endl;
+        exit(1);
+    }
 
     virtual void visit(AddButtonInst* inst)
     {

@@ -172,6 +172,12 @@ class JAVAInstVisitor : public TextInstVisitor {
         tab(fTab, *fOut);
     }
 
+    virtual void visit(AddParameterInst* inst)
+    {
+        std::cerr << "Java backend NYI for Parameters!" << std::endl;
+        exit(1);
+    }
+
     virtual void visit(AddButtonInst* inst)
     {
         string name;

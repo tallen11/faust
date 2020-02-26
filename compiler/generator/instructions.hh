@@ -85,6 +85,8 @@ struct WhileLoopInst;
 struct BlockInst;
 struct SwitchInst;
 
+struct AddParameterInst;
+
 // User interface
 struct AddMetaDeclareInst;
 struct OpenboxInst;
@@ -169,6 +171,9 @@ DeclareStructTypeInst* isStructType(const string& name);
 struct InstVisitor : public virtual Garbageable {
     InstVisitor() {}
     virtual ~InstVisitor() {}
+
+    // Parameter
+    virtual void visit(AddParameterInst* inst) {}
 
     // User interface
     virtual void visit(AddMetaDeclareInst* inst) {}
@@ -304,6 +309,9 @@ struct CloneVisitor : public virtual Garbageable {
 
     // Block
     virtual StatementInst* visit(BlockInst* inst) = 0;
+
+    // Parameter
+    virtual StatementInst* visit(AddParameterInst* inst) = 0;
 
     // User interface
     virtual StatementInst* visit(AddMetaDeclareInst* inst) = 0;
@@ -653,6 +661,18 @@ struct OpenboxInst : public StatementInst {
 
 struct CloseboxInst : public StatementInst {
     CloseboxInst() {}
+
+    void accept(InstVisitor* visitor) { visitor->visit(this); }
+
+    StatementInst* clone(CloneVisitor* cloner) { return cloner->visit(this); }
+};
+
+struct AddParameterInst : public StatementInst {
+    
+    const string fLabel;
+    const double fInit;
+
+    AddParameterInst(const string& label, double init) : fLabel(label), fInit(init) { }
 
     void accept(InstVisitor* visitor) { visitor->visit(this); }
 
@@ -1407,6 +1427,12 @@ class BasicCloneVisitor : public CloneVisitor {
     }
     virtual StatementInst* visit(OpenboxInst* inst) { return new OpenboxInst(inst->fName, inst->fOrient); }
     virtual StatementInst* visit(CloseboxInst* inst) { return new CloseboxInst(); }
+
+    virtual StatementInst* visit(AddParameterInst* inst)
+    {
+        return new AddParameterInst(inst->fLabel, inst->fInit);
+    }
+
     virtual StatementInst* visit(AddButtonInst* inst)
     {
         return new AddButtonInst(inst->fLabel, inst->fZone, inst->fType);
@@ -1721,6 +1747,11 @@ struct InstBuilder {
     static AddButtonInst* genAddButtonInst(const string& label, const string& zone)
     {
         return new AddButtonInst(label, zone, AddButtonInst::kDefaultButton);
+    }
+
+    static AddParameterInst* genAddParameterInst(const string& label, double init)
+    {
+        return new AddParameterInst(label, init);
     }
 
     static AddButtonInst* genAddCheckbuttonInst(const string& label, const string& zone)

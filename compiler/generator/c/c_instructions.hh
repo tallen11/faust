@@ -154,6 +154,12 @@ class CInstVisitor : public TextInstVisitor {
         *fOut << "ui_interface->closeBox(ui_interface->uiInterface);";
         tab(fTab, *fOut);
     }
+
+    virtual void visit(AddParameterInst* inst)
+    {
+        *fOut << "dsp->" << inst->fLabel << " = " << inst->fInit;
+        EndLine();
+    }
     
     virtual void visit(AddButtonInst* inst)
     {

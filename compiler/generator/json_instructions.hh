@@ -91,6 +91,12 @@ struct JSONInstVisitor : public DispatchVisitor, public JSONUIReal<REAL> {
 
     virtual void visit(CloseboxInst* inst) { this->closeBox(); }
 
+    virtual void visit(AddParameterInst* inst)
+    {
+        std::cerr << "JSON backend NYI for Parameters!" << std::endl;
+        exit(1);
+    }
+
     virtual void visit(AddButtonInst* inst)
     {
         switch (inst->fType) {

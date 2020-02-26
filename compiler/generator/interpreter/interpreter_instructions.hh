@@ -175,6 +175,12 @@ struct InterpreterInstVisitor : public DispatchVisitor {
         fUserInterfaceBlock->push(new FIRUserInterfaceInstruction<T>(FBCInstruction::kCloseBox));
     }
 
+    virtual void visit(AddParameterInst* inst)
+    {
+        std::cerr << "Interpreter backend NYI for Parameters!" << std::endl;
+        exit(1);
+    }
+
     virtual void visit(AddButtonInst* inst)
     {
         FBCInstruction::Opcode opcode;

@@ -966,12 +966,18 @@ ValueInst* InstructionsCompiler::generateFloatCast(Tree sig, Tree x)
 
 ValueInst* InstructionsCompiler::generateParameterAux(Tree sig, Tree label, Tree cur, const string& name)
 {
-   string varname = gGlobal->getFreshID(name) + "_" + tree2str(hd(label));
-   Typed* type    = InstBuilder::genFloatMacroTyped();
+    string paramName = tree2str(hd(label));
 
-   pushDeclare(InstBuilder::genDecStructVar(varname, type));
+    string varname = gGlobal->getFreshID(name) + "_" + paramName;
+    Typed* type    = InstBuilder::genFloatMacroTyped();
 
-   return generateCacheCode(sig, InstBuilder::genCastFloatInst(InstBuilder::genLoadStructVar(varname)));
+    double initialValue = tree2double(cur);
+
+    pushDeclare(InstBuilder::genDecStructVar(varname, type));
+    pushInitMethod(InstBuilder::genAddParameterInst(paramName, initialValue));
+    // pushClearMethod(InstBuilder::genAddParameterInst(paramName, 0.0));
+
+    return generateCacheCode(sig, InstBuilder::genCastFloatInst(InstBuilder::genLoadStructVar(varname)));
 }
 
 ValueInst* InstructionsCompiler::generateParameter(Tree sig, Tree label, Tree cur)
