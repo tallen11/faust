@@ -168,6 +168,10 @@ int getSubSignals(Tree sig, vector<Tree>& vsigs, bool visitgen)
         return 1;
     }
 
+    else if (isSigParameter(sig, label, c)) {
+        return 0;
+    }
+
     else if (isSigButton(sig, label)) {
         return 0;
     } else if (isSigCheckbox(sig, label)) {

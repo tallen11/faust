@@ -238,6 +238,7 @@ static string sigLabel(Tree sig)
         fout << "float";
     }
 #if 0
+    else if ( isSigParameter(sig, label, c) )       { fout << "parameter \"" << *label << '"'; }
     else if ( isSigButton(sig, label) ) 			{ fout << "button \"" << *label << '"'; }
     else if ( isSigCheckbox(sig, label) ) 			{ fout << "checkbox \"" << *label << '"'; }
     else if ( isSigVSlider(sig, label,c,x,y,z) )	{ fout << "vslider \"" << *label << '"';  }
@@ -247,6 +248,10 @@ static string sigLabel(Tree sig)
     else if ( isSigVBargraph(sig, label,x,y,z) )	{ fout << "vbargraph \"" << *label << '"'; 	}
     else if ( isSigHBargraph(sig, label,x,y,z) )	{ fout << "hbargraph \"" << *label << '"'; 	}
 #else
+    else if (isSigParameter(sig, label, c)) {
+        fout << "parameter";
+    }
+
     else if (isSigButton(sig, label)) {
         fout << "button";
     } else if (isSigCheckbox(sig, label)) {

@@ -149,6 +149,11 @@ Tree SignalIdentity::transformation(Tree sig)
         return sigFloatCast(self(x));
     }
 
+    // Parameter
+    else if (isSigParameter(sig, label, c)) {
+        return sigParameter(label, self(c));
+    }
+
     // UI
     else if (isSigButton(sig, label)) {
         return sig;

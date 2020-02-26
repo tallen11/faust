@@ -349,6 +349,32 @@ bool isSigFloatCast(Tree t, Tree& x)
 }
 
 /*****************************************************************************
+                             Parameter
+*****************************************************************************/
+
+Tree sigParameter(Tree label, Tree cur)
+{
+    return tree(gGlobal->SIGPARAMETER, label, list1(cur));
+}
+
+bool isSigParameter(Tree s)
+{
+    Tree lbl, params;
+    return isTree(s, gGlobal->SIGPARAMETER, lbl, params);
+}
+
+bool isSigParameter(Tree s, Tree& label, Tree& cur)
+{
+    Tree params;
+    if (isTree(s, gGlobal->SIGPARAMETER, label, params)) {
+        cur  = nth(params, 0);
+        return true;
+    } else {
+        return false;
+    }
+}
+
+/*****************************************************************************
                              User Interface Elements
 *****************************************************************************/
 

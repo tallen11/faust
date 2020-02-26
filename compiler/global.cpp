@@ -302,6 +302,7 @@ global::global() : TABBER(1), gLoopDetector(1024, 400), gStackOverflowDetector(M
     BOXFFUN          = symbol("BoxFFun");
     BOXFCONST        = symbol("BoxFConst");
     BOXFVAR          = symbol("BoxFVar");
+    BOXPARAMETER     = symbol("BoxParameter");
     BOXBUTTON        = symbol("BoxButton");
     BOXCHECKBOX      = symbol("BoxCheckbox");
     BOXHSLIDER       = symbol("BoxHSlider");
@@ -356,6 +357,7 @@ global::global() : TABBER(1), gLoopDetector(1024, 400), gStackOverflowDetector(M
     SIGPROJ            = symbol("SigProj");
     SIGINTCAST         = symbol("SigIntCast");
     SIGFLOATCAST       = symbol("SigFloatCast");
+    SIGPARAMETER       = symbol("SigParameter");
     SIGBUTTON          = symbol("SigButton");
     SIGCHECKBOX        = symbol("SigCheckbox");
     SIGWAVEFORM        = symbol("SigWaveform");
@@ -473,6 +475,7 @@ void global::init()
     TEXEC = makeSimpleType(kInt, kKonst, kExec, kVect, kNum, interval());
 
     // More predefined types
+    TPARAM   = makeSimpleType(kReal, kBlock, kExec, kVect, kNum, interval());
     TINPUT   = makeSimpleType(kReal, kSamp, kExec, kVect, kNum, interval());
     TGUI     = makeSimpleType(kReal, kBlock, kExec, kVect, kNum, interval());
     TGUI01   = makeSimpleType(kReal, kBlock, kExec, kVect, kNum, interval(0, 1));

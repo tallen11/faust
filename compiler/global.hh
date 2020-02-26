@@ -301,6 +301,7 @@ struct global {
     Sym BOXFFUN;
     Sym BOXFCONST;
     Sym BOXFVAR;
+    Sym BOXPARAMETER;
     Sym BOXBUTTON;
     Sym BOXCHECKBOX;
     Sym BOXHSLIDER;
@@ -368,6 +369,7 @@ struct global {
     Sym SIGPROJ;
     Sym SIGINTCAST;
     Sym SIGFLOATCAST;
+    Sym SIGPARAMETER;
     Sym SIGBUTTON;
     Sym SIGCHECKBOX;
     Sym SIGWAVEFORM;
@@ -409,6 +411,7 @@ struct global {
     Type TEXEC;
 
     // More predefined types
+    Type TPARAM;
     Type TINPUT;
     Type TGUI;
     Type TGUI01;

@@ -131,6 +131,8 @@ class ScalarCompiler : public Compiler {
     string generateIntCast(Tree sig, Tree x);
     string generateFloatCast(Tree sig, Tree x);
 
+    string generateParameter(Tree sig, Tree label, Tree cur);
+
     string generateButton(Tree sig, Tree label);
     string generateCheckbox(Tree sig, Tree label);
     string generateVSlider(Tree sig, Tree label, Tree cur, Tree min, Tree max, Tree step);

@@ -148,6 +148,8 @@ TMACRO   \\{ID}(\[(\ *({ID}|{NUMBER}),?\ *)\])?(\{(\ *({ID}|{NUMBER}),?\ *)*\})*
 "select2"	return SELECT2;
 "select3"	return SELECT3;
 
+"parameter" return PARAMETER;
+
 "ffunction"	return FFUNCTION;
 "fconstant" return FCONSTANT;
 "fvariable" return FVARIABLE;

@@ -672,6 +672,17 @@ string DocCompiler::generateFloatCast(Tree sig, Tree x, int priority)
 }
 
 /*****************************************************************************
+                            parameter
+*****************************************************************************/
+
+string DocCompiler::generateParameter(Tree sig, Tree label, Tree cur)
+{
+    string varname = getFreshID("{p}") + "(t)";
+    gGlobal->gDocNoticeFlagMap["parametersigs"] = true;
+    return generateCacheCode(sig, varname);
+}
+
+/*****************************************************************************
                             user interface elements
 *****************************************************************************/
 

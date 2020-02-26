@@ -685,6 +685,32 @@ bool isBoxFVar(Tree s, Tree& type, Tree& name, Tree& file)
 }
 
 /*****************************************************************************
+                             Parameter Elements
+*****************************************************************************/
+
+Tree boxParameter(Tree lbl, Tree cur)
+{
+    return tree(gGlobal->BOXPARAMETER, lbl, list1(cur));
+}
+
+bool isBoxParameter(Tree s)
+{
+    Tree lbl, cur;
+    return isTree(s, gGlobal->BOXPARAMETER, lbl, cur);
+}
+
+bool isBoxParameter(Tree s, Tree& lbl, Tree& cur)
+{
+    Tree params;
+    if (isTree(s, gGlobal->BOXPARAMETER, lbl, params)) {
+        cur  = nth(params, 0);
+        return true;
+    } else {
+        return false;
+    }
+}
+
+/*****************************************************************************
                              User Interface Elements
 *****************************************************************************/
 

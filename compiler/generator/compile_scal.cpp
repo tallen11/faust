@@ -462,6 +462,10 @@ string ScalarCompiler::generateCode(Tree sig)
         return generateFloatCast(sig, x);
     }
 
+    else if (isSigParameter(sig, label, c)) {
+        return generateParameter(sig, label, c);
+    }
+
     else if (isSigButton(sig, label)) {
         return generateButton(sig, label);
     } else if (isSigCheckbox(sig, label)) {
@@ -754,6 +758,18 @@ string ScalarCompiler::generateIntCast(Tree sig, Tree x)
 string ScalarCompiler::generateFloatCast(Tree sig, Tree x)
 {
     return generateCacheCode(sig, subst("$1($0)", CS(x), ifloat()));
+}
+
+/*****************************************************************************
+ parameter
+ *****************************************************************************/
+
+string ScalarCompiler::generateParameter(Tree sig, Tree label, Tree cur)
+{
+    string varname = getFreshID("fparam");
+    fClass->addDeclCode(subst("$1 \t$0;", varname, xfloat()));
+
+    return generateCacheCode(sig, subst("$1($0)", varname, ifloat()));
 }
 
 /*****************************************************************************

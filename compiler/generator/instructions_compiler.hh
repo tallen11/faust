@@ -76,6 +76,8 @@ class InstructionsCompiler : public virtual Garbageable {
     // Redefined in InterpreterInstructionsCompiler
     virtual StatementInst* generateShiftArray(const string& vname, int delay);
 
+    ValueInst* generateParameterAux(Tree sig, Tree label, Tree cur, const string& name);
+
     ValueInst* generateButtonAux(Tree sig, Tree path, const string& name);
     ValueInst* generateSliderAux(Tree sig, Tree path, Tree cur, Tree min, Tree max, Tree step, const string& name);
     ValueInst* generateBargraphAux(Tree sig, Tree path, Tree min, Tree max, ValueInst* exp, const string& name);
@@ -168,6 +170,8 @@ class InstructionsCompiler : public virtual Garbageable {
 
     virtual ValueInst* generateIntCast(Tree sig, Tree x);
     virtual ValueInst* generateFloatCast(Tree sig, Tree x);
+
+    virtual ValueInst* generateParameter(Tree sig, Tree label, Tree cur);
 
     virtual ValueInst* generateButton(Tree sig, Tree label);
     virtual ValueInst* generateCheckbox(Tree sig, Tree label);

@@ -116,6 +116,9 @@ Tree unquote(char* str)
 
 %token INTCAST
 %token FLOATCAST
+
+%token PARAMETER
+
 %token FFUNCTION
 %token FCONSTANT
 %token FVARIABLE
@@ -291,6 +294,8 @@ Tree unquote(char* str)
 
 %type <exp> finputs
 %type <exp> foutputs
+
+%type <exp> parameter
 
 %type <exp> button
 %type <exp> checkbox
@@ -572,6 +577,7 @@ primitive		: INT   						{ $$ = boxInt(atoi(yytext)); }
 				| ffunction						{ $$ = boxFFun($1); }
                 | fconst                        { $$ = $1; }
                 | fvariable                     { $$ = $1; }
+				| parameter						{ $$ = $1; }
                 | COMPONENT LPAR uqstring RPAR  { $$ = boxComponent($3); }
                 | LIBRARY LPAR uqstring RPAR    { $$ = boxLibrary($3); }
                 | ENVIRONMENT LBRAQ stmtlist RBRAQ { $$ = boxWithLocalDef(boxEnvironment(),formatDefinitions($3)); }
@@ -667,6 +673,11 @@ fconst          : FCONSTANT LPAR type name PAR fstring RPAR
 
 fvariable       : FVARIABLE LPAR type name PAR fstring RPAR
                                                 { $$ = boxFVar($3,$4,$6); }
+				;
+
+/* Description of local parameter */
+parameter		: PARAMETER LPAR uqstring PAR argument RPAR
+												{ $$ = boxParameter($3,$5); }
 				;
 
 /* Description of user interface building blocks */

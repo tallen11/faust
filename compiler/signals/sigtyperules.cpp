@@ -344,6 +344,11 @@ static Type infereSigType(Tree sig, Tree env)
     else if (isSigFVar(sig, type, name, file))
         return infereFVarType(type);
 
+    else if (isSigParameter(sig, label, cur)) {
+        Type t1 = T(cur, env);
+        return gGlobal->TPARAM;
+    }
+
     else if (isSigButton(sig)) { /*sig->setType(TGUI01);*/
         return gGlobal->TGUI01;
     }

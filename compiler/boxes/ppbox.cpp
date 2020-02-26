@@ -231,6 +231,10 @@ ostream &boxpp::print(ostream &fout) const
     else if (isBoxOutputs(box, t1))
         fout << "outputs(" << boxpp(t1) << ")";
 
+    // parameter
+    else if (isBoxParameter(box, label, cur))
+        fout << "parameter(" << tree2quotedstr(label) << ", " << boxpp(cur) << ')';
+
     // user interface
     else if (isBoxButton(box, label))
         fout << "button(" << tree2quotedstr(label) << ')';

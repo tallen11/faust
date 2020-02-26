@@ -421,9 +421,17 @@ static Tree realeval(Tree exp, Tree visited, Tree localValEnv)
         // cerr << "component is " << boxpp(res) << endl;
         return res;
 
+        // parameter
+        //------------------------
+    } else if (isBoxParameter(exp, label, cur)) {
+        const char* l1 = tree2str(label);
+        string      l2 = evalLabel(l1, visited, localValEnv);
+
+        return boxParameter(tree(l2.c_str()),
+                            tree(eval2double(cur, visited, localValEnv)));
+
         // user interface elements
         //------------------------
-
     } else if (isBoxButton(exp, label)) {
         const char* l1 = tree2str(label);
         string      l2 = evalLabel(l1, visited, localValEnv);
@@ -1567,6 +1575,12 @@ Tree insideBoxSimplification(Tree box)
     }
 
     else if (isBoxFFun(box, ff)) {
+        return box;
+    }
+
+    // Parameter
+
+    else if (isBoxParameter(box, label, cur)) {
         return box;
     }
 

@@ -140,6 +140,9 @@ static int infereSigOrder(Tree sig)
     else if (isSigFVar(sig, type, name, file))
         return 2;
 
+    else if (isSigParameter(sig))
+        return 2;
+
     else if (isSigButton(sig))
         return 2;
 

@@ -460,6 +460,8 @@ extern Type TCOMP;
 extern Type TINIT;
 extern Type TEXEC;
 
+extern Type TPARAM;
+
 extern Type TINPUT;
 extern Type TGUI;
 extern Type TGUI01;

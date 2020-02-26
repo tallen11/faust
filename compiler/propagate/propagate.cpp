@@ -422,6 +422,13 @@ siglist realPropagate(Tree slotenv, Tree path, Tree box, const siglist& lsig)
         return makeList(sigFFun(ff, listConvert(lsig)));
     }
 
+    // Parameter
+
+    else if (isBoxParameter(box, label, cur)) {
+        faustassert(lsig.size() == 0);
+        return makeList(sigParameter(normalizePath(cons(label, path)), cur));
+    }
+
     // User Interface Widgets
 
     else if (isBoxButton(box, label)) {

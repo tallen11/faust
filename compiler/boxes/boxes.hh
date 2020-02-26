@@ -264,6 +264,14 @@ Tree importFile(Tree filename);
 bool isImportFile(Tree s, Tree& filename);
 
 /*****************************************************************************
+                             Parameters
+*****************************************************************************/
+
+Tree boxParameter(Tree lbl, Tree cur);
+bool isBoxParameter(Tree s);
+bool isBoxParameter(Tree s, Tree& lbl, Tree& cur);
+
+/*****************************************************************************
                              User Interface Elements
 *****************************************************************************/
 

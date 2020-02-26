@@ -532,6 +532,10 @@ ValueInst* InstructionsCompiler::generateCode(Tree sig)
         return generateFloatCast(sig, x);
     }
 
+    else if (isSigParameter(sig, label, c)) {
+        return generateParameter(sig, label, c);
+    }
+
     else if (isSigButton(sig, label)) {
         return generateButton(sig, label);
     } else if (isSigCheckbox(sig, label)) {
@@ -954,6 +958,25 @@ ValueInst* InstructionsCompiler::generateFloatCast(Tree sig, Tree x)
 {
     return generateCacheCode(
         sig, (getCertifiedSigType(x)->nature() != kReal) ? InstBuilder::genCastFloatInst(CS(x)) : CS(x));
+}
+
+/*****************************************************************************
+ parameter
+ *****************************************************************************/
+
+ValueInst* InstructionsCompiler::generateParameterAux(Tree sig, Tree label, Tree cur, const string& name)
+{
+   string varname = gGlobal->getFreshID(name) + "_" + tree2str(hd(label));
+   Typed* type    = InstBuilder::genFloatMacroTyped();
+
+   pushDeclare(InstBuilder::genDecStructVar(varname, type));
+
+   return generateCacheCode(sig, InstBuilder::genCastFloatInst(InstBuilder::genLoadStructVar(varname)));
+}
+
+ValueInst* InstructionsCompiler::generateParameter(Tree sig, Tree label, Tree cur)
+{
+    return generateParameterAux(sig, label, cur, "fParam");
 }
 
 /*****************************************************************************

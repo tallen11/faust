@@ -249,6 +249,11 @@ static bool infereBoxType(Tree t, int* inum, int* onum)
         *onum = 1;
     }
 
+    else if (isBoxParameter(t)) {
+        *inum = 0;
+        *onum = 1;
+    }
+
     else if (isBoxButton(t)) {
         *inum = 0;
         *onum = 1;
